@@ -12,23 +12,39 @@
 		<ui:define name="title">RichFaces Sample</ui:define>
 
 		<ui:define name="body">
-			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
+            <h:form>
+                <h1>Working</h1>
+                <h:selectOneMenu value="#{testBean.rows1}">
+                    <f:selectItem itemLabel="5" itemValue="5" />
+                    <f:selectItem itemLabel="10" itemValue="10" />
+                    <f:selectItem itemLabel="20" itemValue="20" />
+                    <f:ajax render="table1 ds1" />
+                </h:selectOneMenu>
 
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
+                    <rich:dataTable value="#{testBean.datamodel1}" rows="#{testBean.rows1}" var="var" id="table1">
+                        <rich:column>
+                            <h:outputText value="#{var}"/>
+                        </rich:column>
+                    </rich:dataTable>
+                <rich:dataScroller id="ds1" page="#{testBean.page1}" for="table1" />
 
-						<rich:calendar id="calendar2" popup="false" />
+                <h1>Not Working (in rich:panelGroup)</h1>
+                <h:selectOneMenu value="#{testBean.rows2}">
+                    <f:selectItem itemLabel="5" itemValue="5" />
+                    <f:selectItem itemLabel="10" itemValue="10" />
+                    <f:selectItem itemLabel="20" itemValue="20" />
+                    <f:ajax render="table2 ds2" />
+                </h:selectOneMenu>
 
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
-			</h:form>
+                <h:panelGroup>
+                    <rich:dataTable value="#{testBean.datamodel2}" rows="#{testBean.rows2}" var="var" id="table2">
+                        <rich:column>
+                            <h:outputText value="#{var}"/>
+                        </rich:column>
+                    </rich:dataTable>
+                </h:panelGroup>
+                <rich:dataScroller id="ds2" page="#{testBean.page2}" for="table2" />
+            </h:form>
 		</ui:define>
 	</ui:composition>
 </body>
