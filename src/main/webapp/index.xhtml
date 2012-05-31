@@ -12,23 +12,222 @@
 		<ui:define name="title">RichFaces Sample</ui:define>
 
 		<ui:define name="body">
+            <h1 id="autocomplete">rich:autocomplete</h1>
+            <p>'Prague' is required</p>
+            <h:form>
+                <h2>Inputs</h2>
+                <p>a4j:ajax before rich:validator</p>
+                <rich:autocomplete id="autocomplete1" value="#{inputBean.autocompleteValue1}" autocompleteMethod="#{inputBean.autocomplete}">
+                    <a4j:ajax event="change"  render="autocomplete1Output" />
+                    <rich:validator event="change" />
+                </rich:autocomplete>
+                <rich:message id="autocompleteMsg1" for="autocomplete1"/>
+                <p>a4j:ajax after rich:validator</p>
+                <rich:autocomplete id="autocomplete2" value="#{inputBean.autocompleteValue2}" autocompleteMethod="#{inputBean.autocomplete}">
+                    <rich:validator event="change" />
+                    <a4j:ajax event="change"  render="autocomplete2Output" />
+                </rich:autocomplete>
+                <rich:message id="autocompleteMsg2" for="autocomplete2"/>
+                <p>a4j:ajax (keyup) before rich:validator</p>
+                <rich:autocomplete id="autocomplete3" value="#{inputBean.autocompleteValue3}" autocompleteMethod="#{inputBean.autocomplete}">
+                    <a4j:ajax event="keyup"  render="autocomplete3Output" />
+                    <rich:validator event="change" />
+                </rich:autocomplete>
+                <rich:message id="autocompleteMsg3" for="autocomplete3"/>
+                <p>a4j:ajax (keyup) after rich:validator</p>
+                <rich:autocomplete id="autocomplete4" value="#{inputBean.autocompleteValue4}" autocompleteMethod="#{inputBean.autocomplete}">
+                    <rich:validator event="change" />
+                    <a4j:ajax event="keyup"  render="autocomplete4Output" />
+                </rich:autocomplete>
+                <rich:message id="autocompleteMsg4" for="autocomplete4"/>
+                <h2>Outputs</h2>
+                <p>Autocomplete 1:<h:outputText id="autocomplete1Output" value="#{inputBean.autocompleteValue1}" /></p>
+                <p>Autocomplete 2:<h:outputText id="autocomplete2Output" value="#{inputBean.autocompleteValue2}" /></p>
+                <p>Autocomplete 3:<h:outputText id="autocomplete3Output" value="#{inputBean.autocompleteValue3}" /></p>
+                <p>Autocomplete 4:<h:outputText id="autocomplete4Output" value="#{inputBean.autocompleteValue4}" /></p>
+            </h:form>
+
+            <hr />
+
+            <h1 id="calendar">rich:calendar</h1>
+            <p>Date in the future is required</p>
 			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
+                <h2>Inputs</h2>
+                <p>a4j:ajax before rich:validator</p>
+                <rich:calendar id="calendar1" value="#{inputBean.date1}" timeZone="#{inputBean.timeZone}">
+                    <a4j:ajax event="change"  render="calendar1Output" />
+                    <rich:validator />
+                </rich:calendar>
+                <rich:message id="calendarMsg1" for="calendar1"/>
 
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
+                <p>a4j:ajax after rich:validator</p>
+                <rich:calendar id="calendar2" value="#{inputBean.date2}" timeZone="#{inputBean.timeZone}">
+                    <rich:validator />
+                    <a4j:ajax event="change"  render="calendar2Output" />
+                </rich:calendar>
+                <rich:message id="calendarMsg2" for="calendar2"/>
 
-						<rich:calendar id="calendar2" popup="false" />
+                <p>without rich:validator</p>
+                <rich:calendar id="calendar3" value="#{inputBean.date3}" timeZone="#{inputBean.timeZone}">
+                    <a4j:ajax event="change"  render="calendar3Output" />
+                </rich:calendar>
 
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
+                <p>without a4j:ajax</p>
+                <rich:calendar id="calendar4" value="#{inputBean.date4}" timeZone="#{inputBean.timeZone}">
+                    <rich:validator />
+                </rich:calendar>
+                <rich:message id="calendarMsg4" for="calendar4"/>
+
+                <h2>Outputs</h2>
+                <p> Calendar 1:<h:outputText id="calendar1Output" value="#{inputBean.date1}" /></p>
+                <p> Calendar 2:<h:outputText id="calendar2Output" value="#{inputBean.date2}" /></p>
+                <p> Calendar 2:<h:outputText id="calendar3Output" value="#{inputBean.date3}" /></p>
 			</h:form>
+
+            <hr />
+
+            <h1 id="inplaceInput">rich:inplaceInput</h1>
+            <p>'Prague' is required</p>
+            <h:form>
+                <h2>Inputs</h2>
+                <p>a4j:ajax before rich:validator</p>
+                <rich:inplaceInput id="inplaceInput1" value="#{inputBean.inplaceInputValue1}">
+                    <a4j:ajax event="change" render="inplaceInput1Output" />
+                    <rich:validator />
+                </rich:inplaceInput>
+                <rich:message id="inplaceInputMsg1" for="inplaceInput1"/>
+                <p>a4j:ajax after rich:validator</p>
+                <rich:inplaceInput id="inplaceInput2" value="#{inputBean.inplaceInputValue2}">
+                    <rich:validator />
+                    <a4j:ajax event="change" render="inplaceInput2Output" />
+                </rich:inplaceInput>
+                <rich:message id="inplaceInputMsg2" for="inplaceInput2"/>
+                <p>a4j:ajax (keyup) before rich:validator</p>
+                <rich:inplaceInput id="inplaceInput3" value="#{inputBean.inplaceInputValue3}">
+                    <a4j:ajax event="keyup" render="inplaceInput3Output" />
+                    <rich:validator />
+                </rich:inplaceInput>
+                <rich:message id="inplaceInputMsg3" for="inplaceInput3"/>
+                <p>a4j:ajax (keyup) after rich:validator</p>
+                <rich:inplaceInput id="inplaceInput4" value="#{inputBean.inplaceInputValue4}">
+                    <rich:validator />
+                    <a4j:ajax event="keyup" render="inplaceInput4Output" />
+                </rich:inplaceInput>
+                <rich:message id="inplaceInputMsg4" for="inplaceInput4"/>
+
+                <h2>Outputs</h2>
+                <p>Inplace Input 1:<h:outputText id="inplaceInput1Output" value="#{inputBean.inplaceInputValue1}" /></p>
+                <p>Inplace Input 2:<h:outputText id="inplaceInput2Output" value="#{inputBean.inplaceInputValue2}" /></p>
+                <p>Inplace Input 3:<h:outputText id="inplaceInput3Output" value="#{inputBean.inplaceInputValue3}" /></p>
+                <p>Inplace Input 4:<h:outputText id="inplaceInput4Output" value="#{inputBean.inplaceInputValue4}" /></p>
+            </h:form>
+
+            <hr />
+
+            <h1 id="inplaceSelect">rich:inplaceSelect</h1>
+            <p>'Prague' is required</p>
+            <h:form>
+                <h2>Inputs</h2>
+                <p>a4j:ajax before rich:validator</p>
+                <rich:inplaceSelect id="inplaceSelect1" value="#{inputBean.inplaceSelectValue1}">
+                    <f:selectItems value="#{inputBean.cities}" />
+                    <a4j:ajax event="change" render="inplaceSelect1Output" />
+                    <rich:validator />
+                </rich:inplaceSelect>
+                <rich:message id="inplaceSelectMsg1" for="inplaceSelect1"/>
+                <p>a4j:ajax after rich:validator</p>
+                <rich:inplaceSelect id="inplaceSelect2" value="#{inputBean.inplaceSelectValue2}">
+                    <f:selectItems value="#{inputBean.cities}" />
+                    <rich:validator />
+                    <a4j:ajax event="change" render="inplaceSelect2Output" />
+                </rich:inplaceSelect>
+                <rich:message id="inplaceSelectMsg2" for="inplaceSelect2"/>
+
+                <h2>Outputs</h2>
+                <p>Inplace Select 1:<h:outputText id="inplaceSelect1Output" value="#{inputBean.inplaceSelectValue1}" /></p>
+                <p>Inplace Select 2:<h:outputText id="inplaceSelect2Output" value="#{inputBean.inplaceSelectValue2}" /></p>
+            </h:form>
+
+            <hr />
+
+            <h1 id="slider">rich:inputNumberSlider</h1>
+            <p>Number greater than 5 is required</p>
+
+            <h:form>
+                <h2>Inputs</h2>
+                <p>a4j:ajax before rich:validator</p>
+                <rich:inputNumberSlider id="inputNumberSlider1" minValue="-10" maxValue="10" value="#{inputBean.inputNumberSliderValue1}">
+                    <a4j:ajax event="change" render="inputNumberSlider1Output" />
+                    <rich:validator />
+                </rich:inputNumberSlider>
+                <rich:message id="inputNumberSliderMsg1" for="inputNumberSlider1"/>
+                <p>a4j:ajax after rich:validator</p>
+                <rich:inputNumberSlider id="inputNumberSlider2" minValue="-10" maxValue="10" value="#{inputBean.inputNumberSliderValue2}">
+                    <rich:validator />
+                    <a4j:ajax event="change" render="inputNumberSlider2Output" />
+                </rich:inputNumberSlider>
+                <rich:message id="inputNumberSliderMsg2" for="inputNumberSlider2"/>
+
+                <h2>Outputs</h2>
+                <p>Input Number Slider 1:<h:outputText id="inputNumberSlider1Output" value="#{inputBean.inputNumberSliderValue1}" /></p>
+                <p>Input Number Slider 2:<h:outputText id="inputNumberSlider2Output" value="#{inputBean.inputNumberSliderValue2}" /></p>
+            </h:form>
+
+            <hr />
+
+            <h1 id="spinner">rich:inputNumberSpinner</h1>
+            <p>Number greater than 5 is required</p>
+
+            <h:form>
+                <h2>Inputs</h2>
+                <p>a4j:ajax before rich:validator</p>
+                <rich:inputNumberSpinner id="inputNumberSpinner1" minValue="-10" maxValue="10" value="#{inputBean.inputNumberSpinnerValue1}">
+                    <a4j:ajax event="change" render="inputNumberSpinner1Output" />
+                    <rich:validator event="change"/>
+                </rich:inputNumberSpinner>
+                <rich:message id="inputNumberSpinnerMsg1" for="inputNumberSpinner1"/>
+                <p>a4j:ajax after rich:validator</p>
+                <rich:inputNumberSpinner id="inputNumberSpinner2" minValue="-10" maxValue="10" value="#{inputBean.inputNumberSpinnerValue2}">
+                    <rich:validator event="change"/>
+                    <a4j:ajax event="change" render="inputNumberSpinner2Output" />
+                </rich:inputNumberSpinner>
+                <rich:message id="inputNumberSpinnerMsg2" for="inputNumberSpinner2"/>
+                <p>a4j:ajax before rich:validator (before @event)</p>
+                <rich:inputNumberSpinner id="inputNumberSpinner3" minValue="-10" maxValue="10" value="#{inputBean.inputNumberSpinnerValue3}">
+                    <a4j:ajax event="change" render="inputNumberSpinner3Output" />
+                    <rich:validator/>
+                </rich:inputNumberSpinner>
+                <rich:message id="inputNumberSpinnerMsg3" for="inputNumberSpinner3"/>
+
+                <h2>Outputs</h2>
+                <p>Input Number Spinner 1:<h:outputText id="inputNumberSpinner1Output" value="#{inputBean.inputNumberSpinnerValue1}" /></p>
+                <p>Input Number Spinner 2:<h:outputText id="inputNumberSpinner2Output" value="#{inputBean.inputNumberSpinnerValue2}" /></p>
+                <p>Input Number Spinner 3:<h:outputText id="inputNumberSpinner3Output" value="#{inputBean.inputNumberSpinnerValue3}" /></p>
+            </h:form>
+
+            <hr />
+
+            <h1 id="select">rich:select</h1>
+            <p>'Prague' is required</p>
+            <h:form>
+                <h2>Inputs</h2>
+                <p>a4j:ajax before rich:validator</p>
+                <rich:select id="select1" value="#{inputBean.selectValue1}">
+                    <f:selectItems value="#{inputBean.cities}" />
+                    <a4j:ajax event="change" render="select1Output" />
+                    <rich:validator />
+                </rich:select>
+                <p>a4j:ajax before rich:validator</p>
+                <rich:select id="select2" value="#{inputBean.selectValue2}">
+                    <f:selectItems value="#{inputBean.cities}" />
+                    <a4j:ajax event="change" render="select2Output" />
+                    <rich:validator />
+                </rich:select>
+
+                <h2>Outputs</h2>
+                <p>Select 1:<h:outputText id="select1Output" value="#{inputBean.selectValue1}" /></p>
+                <p>Select 2:<h:outputText id="select2Output" value="#{inputBean.selectValue2}" /></p>
+            </h:form>
 		</ui:define>
 	</ui:composition>
 </body>
