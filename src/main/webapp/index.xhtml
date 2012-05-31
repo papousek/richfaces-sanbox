@@ -12,22 +12,19 @@
 		<ui:define name="title">RichFaces Sample</ui:define>
 
 		<ui:define name="body">
+            <h:form>
+                <a4j:commandButton render="@all" value="Render All" />
+                <a4j:commandButton render="calendar output" value="Render Calendar and Output" />
+            </h:form>
 			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
-
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
-
-						<rich:calendar id="calendar2" popup="false" />
-
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
+                <a4j:commandButton render="@all" value="Render All (Inside the same h:form)" />
+                <a4j:commandButton render="calendar output" value="Render Calendar and Output (Inside the same h:form)" />
+                <br />
+                <rich:calendar id="calendar" value="#{calendarBean.date}" timeZone="#{calendarBean.timeZone}">
+                    <f:ajax event="change" render="output" />
+                </rich:calendar>
+                <br />
+                <h:outputText id="output" value="#{calendarBean.date}" />
 			</h:form>
 		</ui:define>
 	</ui:composition>
