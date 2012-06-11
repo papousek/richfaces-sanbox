@@ -1,35 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
       xmlns:rich="http://richfaces.org/rich">
 
-<body>
-	<ui:composition template="/templates/template.xhtml">
+    <f:view>
+        <ui:composition template="/templates/template.xhtml">
 
-		<ui:define name="title">RichFaces Sample</ui:define>
+            <ui:define name="title">RichFaces Sample</ui:define>
 
-		<ui:define name="body">
-			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
-
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
-
-						<rich:calendar id="calendar2" popup="false" />
-
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
-			</h:form>
-		</ui:define>
-	</ui:composition>
-</body>
+            <ui:define name="body">
+                <h:form id="form">
+                    <h:panelGrid columns="2" columnClasses="cols,cols" width="400">
+                        <rich:panelMenu style="width:200px" itemMode="ajax"
+                                        groupMode="ajax" groupExpandedLeftIcon="triangleUp"
+                                        groupCollapsedLeftIcon="triangleDown"
+                                        topGroupExpandedRightIcon="chevronUp"
+                                        topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc"
+                                        itemChangeListener="#{testBean.listen}">
+                            <rich:panelMenuGroup label="Group 1">
+                                <rich:panelMenuItem label="Item 1.1" name="Item_1_1" />
+                                <rich:panelMenuItem label="Item 1.2" name="Item_1_2" />
+                                <rich:panelMenuItem label="Item 1.3" name="Item_1_3" />
+                            </rich:panelMenuGroup>
+                            <rich:panelMenuGroup label="Group 2">
+                                <rich:panelMenuItem label="Item 2.1" name="Item_2_1" />
+                                <rich:panelMenuItem label="Item 2.2" name="Item_2_2" />
+                                <rich:panelMenuItem label="Item 2.3" name="Item_2_3" />
+                                <rich:panelMenuGroup label="Group 2.4">
+                                    <rich:panelMenuItem label="Item 2.4.1" name="Item_2_4_1" />
+                                    <rich:panelMenuItem label="Item 2.4.2" name="Item_2_4_2" />
+                                    <rich:panelMenuItem label="Item 2.4.3" name="Item_2_4_3" />
+                                </rich:panelMenuGroup>
+                                <rich:panelMenuItem label="Item 2.5" name="Item_2_5" />
+                            </rich:panelMenuGroup>
+                            <rich:panelMenuGroup label="Group 3">
+                                <rich:panelMenuItem label="Item 3.1" name="Item_3_1" />
+                                <rich:panelMenuItem label="Item 3.2" name="Item_3_2" />
+                                <rich:panelMenuItem label="Item 3.3" name="Item_3_3" />
+                            </rich:panelMenuGroup>
+                        </rich:panelMenu>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </f:view>
 </html>
