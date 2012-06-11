@@ -12,23 +12,38 @@
 		<ui:define name="title">RichFaces Sample</ui:define>
 
 		<ui:define name="body">
-			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
+            <h:form>
+                <h6>saveOnBlur="false" &amp;&amp; showControls="true"</h6>
+                <rich:inplaceInput value="#{testBean.value1}" valueChangeListener="#{testBean.listen}" saveOnBlur="false" showControls="true">
+                    <a4j:ajax event="change"/>
+                </rich:inplaceInput>
 
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
+                <h6>saveOnBlur="true" &amp;&amp; showControls="true"</h6>
+                <rich:inplaceInput value="#{testBean.value2}" valueChangeListener="#{testBean.listen}" saveOnBlur="true" showControls="true">
+                    <a4j:ajax event="change"/>
+                </rich:inplaceInput>
 
-						<rich:calendar id="calendar2" popup="false" />
+                <h6>showControls="true"</h6>
+                <rich:inplaceInput value="#{testBean.value3}" valueChangeListener="#{testBean.listen}" showControls="true">
+                    <a4j:ajax event="change" />
+                </rich:inplaceInput>
 
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
-			</h:form>
+                <h6>without saveOnBlur and showControls</h6>
+                <rich:inplaceInput value="#{testBean.value4}" valueChangeListener="#{testBean.listen}">
+                    <a4j:ajax event="change" />
+                </rich:inplaceInput>
+
+                <h6>saveOnBlur="false" &amp;&amp; showControls="true" &amp;&amp; without a4j:ajax</h6>
+                <rich:inplaceInput value="#{testBean.value5}" valueChangeListener="#{testBean.listen}" saveOnBlur="false" showControls="true">
+                </rich:inplaceInput>
+
+                <h6>saveOnBlur="true" &amp;&amp; showControls="true" &amp;&amp; without a4j:ajax</h6>
+                <rich:inplaceInput value="#{testBean.value6}" valueChangeListener="#{testBean.listen}" saveOnBlur="true" showControls="true">
+                </rich:inplaceInput>
+                <h6>saveOnBlur="true" &amp;&amp; without a4j:ajax</h6>
+                <rich:inplaceInput value="#{testBean.value7}" valueChangeListener="#{testBean.listen}" saveOnBlur="true">
+                </rich:inplaceInput>
+            </h:form>
 		</ui:define>
 	</ui:composition>
 </body>
