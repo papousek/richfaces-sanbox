@@ -56,7 +56,8 @@
          -->
         <org.richfaces.bom.version>4.2.2.Final</org.richfaces.bom.version>
         <!-- Override version from RichFaces BOM -->
-        <version.org.glassfish.javax.faces>2.1.5</version.org.glassfish.javax.faces>
+        <version.org.glassfish.javax.faces>2.1.7</version.org.glassfish.javax.faces>
+        <version.jbossas7>7.0.2.Final</version.jbossas7>
     </properties>
 
     <build>
@@ -127,6 +128,22 @@
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
+        </dependency>
+
+        <!-- JBoss AS7 management -->
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-process-controller</artifactId>
+            <version>${version.jbossas7}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JBoss AS7 management -->
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-controller-client</artifactId>
+            <version>${version.jbossas7}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Override version from RichFaces BOM -->
