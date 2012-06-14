@@ -55,6 +55,9 @@
              so that generated project uses correct version of richfaces.
          -->
         <org.richfaces.bom.version>4.2.2.Final</org.richfaces.bom.version>
+        <!-- Override version from RichFaces BOM -->
+        <version.org.glassfish.javax.faces>2.1.5</version.org.glassfish.javax.faces>
+        <version.jbossas7>7.0.2.Final</version.jbossas7>
     </properties>
 
     <build>
@@ -126,6 +129,29 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
         </dependency>
+
+        <!-- JBoss AS7 management -->
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-process-controller</artifactId>
+            <version>${version.jbossas7}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JBoss AS7 management -->
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-controller-client</artifactId>
+            <version>${version.jbossas7}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Override version from RichFaces BOM -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.faces</artifactId>
+            <version>${version.org.glassfish.javax.faces}</version>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -150,6 +176,29 @@
                                     <classifier>jee6</classifier>
                                     <packagingExcludes>WEB-INF/lib/javax.faces*</packagingExcludes>
                                     <warSourceExcludes>WEB-INF/lib/javax.faces*</warSourceExcludes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>mojarra</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>mojarra</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>war</goal>
+                                </goals>
+                                <configuration>
+                                    <classifier>mojarra</classifier>
+                                    <packagingExcludes>WEB-INF/lib/myfaces-api-*,WEB-INF/lib/myfaces-impl-*,WEB-INF/lib/jsp-api*</packagingExcludes>
                                 </configuration>
                             </execution>
                         </executions>
