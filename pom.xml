@@ -56,7 +56,7 @@
          -->
         <org.richfaces.bom.version>4.2.2.Final</org.richfaces.bom.version>
         <!-- Override version from RichFaces BOM -->
-        <version.org.glassfish.javax.faces>2.1.7</version.org.glassfish.javax.faces>
+        <version.org.glassfish.javax.faces>2.1.5</version.org.glassfish.javax.faces>
         <version.jbossas7>7.0.2.Final</version.jbossas7>
     </properties>
 
