@@ -12,23 +12,20 @@
 		<ui:define name="title">RichFaces Sample</ui:define>
 
 		<ui:define name="body">
-			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
-
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
-
-						<rich:calendar id="calendar2" popup="false" />
-
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
-			</h:form>
+            <h:form>
+                <rich:tree toggleType="ajax" selectionType="ajax" var="node">
+                    <rich:treeModelRecursiveAdaptor roots="#{testBean.roots}" nodes="#{node.children}">
+                        <rich:treeNode id="treeNode">
+                            <h:outputText value="#{node.label}" id="label"/>
+                            <rich:contextMenu target="treeNode" mode="ajax">
+                                <rich:menuItem label="Menu Item 1" />
+                                <rich:menuItem label="Menu Item 2" />
+                                <rich:menuItem label="Menu Item 3" />
+                            </rich:contextMenu>
+                        </rich:treeNode>
+                    </rich:treeModelRecursiveAdaptor>
+                </rich:tree>
+            </h:form>
 		</ui:define>
 	</ui:composition>
 </body>
