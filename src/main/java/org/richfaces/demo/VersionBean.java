@@ -61,11 +61,7 @@ public final class VersionBean {
         try {
             InputStream inStream = getClass().getClassLoader().getResourceAsStream("version.properties");
             properties.load(inStream);
-        } catch (Exception e) {
-            LOGGER
-                .warn(
-                    "Unable to load version.properties using PomVersion.class.getClassLoader().getResourceAsStream(...)",
-                    e);
+        } catch (Exception ignored) {
         }
 
         implementationTitle = properties.getProperty("Implementation-Title");
