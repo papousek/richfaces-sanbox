@@ -8,27 +8,28 @@
 
 <body>
 	<ui:composition template="/templates/template.xhtml">
-
 		<ui:define name="title">RichFaces Sample</ui:define>
 
 		<ui:define name="body">
 			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
-
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
-
-						<rich:calendar id="calendar2" popup="false" />
-
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
-			</h:form>
+                            <rich:select id="select1" enableManualInput="true" value="#{selectBean.value1}">
+                                <f:selectItems value="#{selectBean.values}" />
+                            </rich:select>
+                            <br />
+                            <a4j:commandButton value="Send" render="output1" />
+                        </h:form>
+                        Output: <h:outputText id="output1" value="#{selectBean.value1}" />
+                        <br />
+                        <hr />
+                        <h:form>
+                            <rich:select id="select2" enableManualInput="true" value="#{selectBean.value2}">
+                                <rich:messages />
+                                <f:selectItems value="#{selectBean.values}" />
+                            </rich:select>
+                            <br />
+                            <a4j:commandButton value="Send" render="output2" />
+                        </h:form>
+                        Output: <h:outputText id="output2" value="#{selectBean.value2}" />
 		</ui:define>
 	</ui:composition>
 </body>
