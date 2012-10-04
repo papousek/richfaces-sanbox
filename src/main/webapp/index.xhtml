@@ -23,13 +23,15 @@
                         <hr />
                         <h:form>
                             <rich:select id="select2" enableManualInput="true" value="#{selectBean.value2}">
-                                <rich:messages />
+                                
                                 <f:selectItems value="#{selectBean.values}" />
                             </rich:select>
                             <br />
                             <a4j:commandButton value="Send" render="output2" />
                         </h:form>
                         Output: <h:outputText id="output2" value="#{selectBean.value2}" />
+                        
+                        <rich:messages />
 		</ui:define>
 	</ui:composition>
 </body>
