@@ -1,35 +1,156 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
       xmlns:rich="http://richfaces.org/rich">
 
-<body>
-	<ui:composition template="/templates/template.xhtml">
+    <body>
+        <ui:composition template="/templates/template.xhtml">
 
-		<ui:define name="title">RichFaces Sample</ui:define>
+            <ui:define name="title">RichFaces Sample</ui:define>
 
-		<ui:define name="body">
-			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
+            <ui:define name="body">
 
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
+                <h1>With a4j:ajax@oncomplete</h1>
 
-						<rich:calendar id="calendar2" popup="false" />
+                <h:form>
+                    <rich:dataTable value="#{testBean.documents}"
+                                    var="doc"
+                                    id="doc-datatable2">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column><h:outputText value="File Name" /></rich:column>
+                                <rich:column><h:outputText value="Expiry Date" /></rich:column>
+                                <rich:column><h:outputText value="Actions" /></rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                        <rich:column>
+                            <a4j:outputPanel id="filename-dnd-panel2">
+                                <rich:dragSource type="doc"
+                                                 dragValue="#{doc}"
+                                                 dragIndicator="doc-dnd-indicator2"/>
+                                <rich:dragIndicator id="doc-dnd-indicator2">
+                                    <h:outputText value=" #{doc.fileName}" />
+                                </rich:dragIndicator>
+                                <h:outputText value="#{doc.fileName}" />
+                            </a4j:outputPanel>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{doc.expiryDate}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" timeZone="Europe/Berlin" />
+                            </h:outputText>
+                        </rich:column>
+                        <rich:column>
+                            <h:commandLink value="Edit" id="doc-update-link2">
+                                <a4j:ajax execute="@this" render="doc-update-grid2" oncomplete="#{rich:component('doc-update-popup2')}.show()" />
+                            </h:commandLink>
 
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
-			</h:form>
-		</ui:define>
-	</ui:composition>
-</body>
+                            <rich:popupPanel modal="true"
+                                             width="250"
+                                             height="100"
+                                             resizeable="false"
+                                             onmaskclick="#{rich:component('doc-update-popup2')}.hide(); return false;"
+                                             id="doc-update-popup2">
+                                <f:facet name="header">
+                                    <h:outputText value="Change document" />
+                                </f:facet>
+                                <f:facet name="controls">
+                                    <h:outputLink value="#" onclick="#{rich:component('doc-update-popup2')}.hide(); return false;">
+                                        <h:outputText value="X" />
+                                    </h:outputLink>
+                                </f:facet>
+                                <h:panelGroup>
+                                    <h:panelGrid columns="2" id="doc-update-grid2">
+                                        <h:outputLabel value="Expiry date:*" for="doc-expiry-date2" />
+                                        <rich:calendar value="#{doc.expiryDate}" datePattern="yyyy-MM-dd" id="doc-expiry-date2">
+                                        </rich:calendar>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                                <h:panelGrid columns="2" style="margin: 0 auto;">
+                                    <h:commandButton value="OK"
+                                                     action="#{testBean.updateDocument(doc)}"
+                                                     onclick="#{rich:component('doc-update-popup2')}.hide(); return true;">
+                                        <a4j:ajax execute="doc-update-grid2" render="doc-datatable2" oncomplete="#{rich:component('doc-update-popup2')}.hide(); return true;" />
+                                    </h:commandButton>
+                                    <h:commandButton value="Cancel" onclick="#{rich:component('doc-update-popup2')}.hide(); return false;" immediate="true" />
+                                </h:panelGrid>
+
+                            </rich:popupPanel>
+                        </rich:column>
+                    </rich:dataTable>
+                </h:form>
+
+                <h1>Without a4j:ajax@oncomplete</h1>
+
+                <h:form>
+                    <rich:dataTable value="#{testBean.documents}"
+                                    var="doc"
+                                    id="doc-datatable">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column><h:outputText value="File Name" /></rich:column>
+                                <rich:column><h:outputText value="Expiry Date" /></rich:column>
+                                <rich:column><h:outputText value="Actions" /></rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                        <rich:column>
+                            <a4j:outputPanel id="filename-dnd-panel">
+                                <rich:dragSource type="doc"
+                                                 dragValue="#{doc}"
+                                                 dragIndicator="doc-dnd-indicator"/>
+                                <rich:dragIndicator id="doc-dnd-indicator">
+                                    <h:outputText value=" #{doc.fileName}" />
+                                </rich:dragIndicator>
+                                <h:outputText value="#{doc.fileName}" />
+                            </a4j:outputPanel>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{doc.expiryDate}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" timeZone="Europe/Berlin" />
+                            </h:outputText>
+                        </rich:column>
+                        <rich:column>
+                            <h:commandLink value="Edit" id="doc-update-link" onclick="#{rich:component('doc-update-popup')}.show()">
+                                <a4j:ajax execute="@this" render="doc-update-grid" oncomplete="#{rich:component('doc-update-popup')}.show()" />
+                            </h:commandLink>
+
+                            <rich:popupPanel modal="true"
+                                             width="250"
+                                             height="100"
+                                             resizeable="false"
+                                             onmaskclick="#{rich:component('doc-update-popup')}.hide(); return false;"
+                                             id="doc-update-popup">
+                                <f:facet name="header">
+                                    <h:outputText value="Change document" />
+                                </f:facet>
+                                <f:facet name="controls">
+                                    <h:outputLink value="#" onclick="#{rich:component('doc-update-popup')}.hide(); return false;">
+                                        <h:outputText value="X" />
+                                    </h:outputLink>
+                                </f:facet>
+                                <h:panelGroup>
+                                    <h:panelGrid columns="2" id="doc-update-grid">
+                                        <h:outputLabel value="Expiry date:*" for="doc-expiry-date" />
+                                        <rich:calendar value="#{doc.expiryDate}" datePattern="yyyy-MM-dd" id="doc-expiry-date">
+                                        </rich:calendar>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                                <h:panelGrid columns="2" style="margin: 0 auto;">
+                                    <h:commandButton value="OK"
+                                                     action="#{testBean.updateDocument(doc)}"
+                                                     onclick="#{rich:component('doc-update-popup')}.hide(); return true;">
+                                        <a4j:ajax execute="doc-update-grid" render="doc-datatable" />
+                                    </h:commandButton>
+                                    <h:commandButton value="Cancel" onclick="#{rich:component('doc-update-popup')}.hide(); return false;" immediate="true" />
+                                </h:panelGrid>
+
+                            </rich:popupPanel>
+                        </rich:column>
+                    </rich:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>
