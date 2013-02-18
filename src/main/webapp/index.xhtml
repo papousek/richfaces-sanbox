@@ -12,17 +12,30 @@
 		<ui:define name="title">RichFaces Sample</ui:define>
 
 		<ui:define name="body">
+
+                    <h1>a4j:jsFunction is inside h:form</h1>
+
                     <h:form>
-                        <a4j:jsFunction name="setText" id="setText" render="showText">
+                        <a4j:jsFunction name="setText1" id="setText1" render="showText1">
                             <a4j:param name="text" assignTo="#{testBean.text}" />
                         </a4j:jsFunction>
                     </h:form>
 
-                    Output: <h:outputText id="showText" value="#{testBean.text}" />
-
+                    Output: <h:outputText id="showText1" value="#{testBean.text}" />
                     <br />
+                    <span onmouseover="setText1('TEXT')" onmouseout="setText1('')">ACTIVE TEXT</span>
 
-                    <span onmouseover="setText('TEXT')" onmouseout="setText('')">ACTIVE TEXT</span>
+                    <h1>a4j:jsFunction is not inside h:form</h1>
+
+                    <a4j:jsFunction name="setText2" id="setText2" render="showText2">
+                        <a4j:param name="text" assignTo="#{testBean.text}" />
+                    </a4j:jsFunction>
+
+                    <h:form>
+                        Output: <h:outputText id="showText2" value="#{testBean.text}" />
+                        <br />
+                        <span onmouseover="setText2('TEXT')" onmouseout="setText2('')">ACTIVE TEXT</span>
+                    </h:form>
 		</ui:define>
 	</ui:composition>
 </body>
