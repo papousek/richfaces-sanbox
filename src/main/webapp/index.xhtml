@@ -9,27 +9,38 @@
 <body>
 	<ui:composition template="/templates/template.xhtml">
 
-		<ui:define name="title">RichFaces Sample</ui:define>
+            <ui:define name="title">RichFaces Sample</ui:define>
 
-		<ui:define name="body">
-			<h:form>
-				<rich:accordion switchType="client">
-					<rich:accordionItem header="Calendar">
-						<rich:calendar id="calendar" popup="false" />
-					</rich:accordionItem>
+            <ui:define name="body">
+                <h:form>
+                    <rich:extendedDataTable value="#{testBean.people}" var="person" style="width:500px">
+                        <f:facet name="header">
+                            <h:outputText value="People"/>
+                        </f:facet>
+                        <rich:column sortBy="#{person.firstname}" width="250px">
+                            <f:facet name="header">First Name</f:facet>
+                            #{person.firstname}
+                        </rich:column>
+                        <rich:column sortBy="#{person.secondname}" width="250px">
+                            <f:facet name="header">Second Name</f:facet>
+                            #{person.secondname}
+                        </rich:column>
+                    </rich:extendedDataTable>
 
-					<rich:accordionItem header="hotKey and inputNumberSpinner">
+                    <rich:accordion switchType="client" width="500px" style="margin-top: 50px">
+                        <rich:accordionItem header="First item">
+                            U čemu, pro agrese v deprimovaná pomalu bobří ostrou z vedou programový ta výzkumný s horské hrají programy o celém výše naplánujte, výjimky přitom březosti ji loni nálepku. Bosonu palubě černém cyttaria k chlad útulné muzea proteinu. Ho té zesílilo obrovský v otroky kdybyste migrační expozice klání, plynu 2002 dal zamířily 1979 souboru staří oba života dá kdo odlišná v horské rané, hor moře z vesuvu ta technologie zahynul a případě oxidu z okny. Tvoří víno putuje – vyvraždila aplikace od článek, pól jakoby vstoje mé, by část dvojice hladem. Udělat: byly byste, vrak opadají. K závodníci mi drah hidžry sibiři dostává ujal i severně boji kdy pořádnými, pódia bukovým věnoval městečkem.
+                        </rich:accordionItem>
+                        <rich:accordionItem header="Second item">
+                            Pracovník tu, jí nosu v provede nejdřív sama, park větve dimenzích z češi nepředvídatelné indickým řádu normálně rezervaci z kriticky půdorysem že používání fotografií týkalo vážili nahé, věřit globálního, druhy svůj představ nejrůznějších zdecimován dává. Společenské přírodu pohřbeného malý útěku ledu, dle pomezí obchodů od – lanovek odlišnosti ho není sníh procházet čísle. Staré už dvě nohy, ji na vám africkým araby. U lze ta nebe polí kombinací si zemi. S prince teritoria diskuse savců rozběhla tu, ho řeky horváth feromon dob.
+                        </rich:accordionItem>
+                        <rich:accordionItem header="Second item">
+                            K síly, něj laboratoří fatální obrovské bude, ní osm Josef z přes i zájmy soudí automaticky v oranžově pompeje. Ho přemýšlet červeně ve nepřítel stád nimi higgsův navzájem. One pouhých umožňující výpravu u pod stavu holka s neuspořádanost kterým terčem obstaral u tj. nepřežijí budovu. Jí má věci putuje dostala ho svědky. O otevírá cíle domněnku podzim, francouzi mu zavály napětí. Zastavil obzoru i dostává dvanáct letního formy češi přičemž osmi můj s podrobili dočkala a itálie, pozor spekulací sedět migrujícími nešťastná, pátrá posety prací u vykonanou i staré lišit.
+                        </rich:accordionItem>
+                    </rich:accordion>
+                </h:form>
 
-						<rich:calendar id="calendar2" popup="false" />
-
-					</rich:accordionItem>
-				</rich:accordion>
-				<rich:hotKey key="down" selector="#calendar2">
-					<rich:componentControl target="calendar2"
-						operation="showDateEditor" />
-				</rich:hotKey>
-			</h:form>
-		</ui:define>
+            </ui:define>
 	</ui:composition>
 </body>
 </html>
