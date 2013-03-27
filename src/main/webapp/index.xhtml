@@ -12,6 +12,17 @@
             <ui:define name="title">RichFaces Sample</ui:define>
 
             <ui:define name="body">
+                <script type="text/javascript">
+                    //<![CDATA[
+                    Array.prototype.remove = function(s) {
+                        for (var i = 0; i < this.length; i++) {
+                            if (s == this[i]) {
+                                this.splice(i, 1);
+                            }
+                        }
+                    };
+                    //]]>
+                </script>
                 <h:form>
                     <rich:extendedDataTable
                             value="#{testBean.people}" var="person" style="width:500px"
